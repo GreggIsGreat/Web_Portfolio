@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Portfolio</title>
+</head>
+<body>
+    <header class="header">
+        <a href="#home" class="logo">Portfolio</a>
+
+        <nav class="navbar">
+            <a href="#home" style="--i:1;" class="active">Home</a>
+            <a href="#skills" style="--i:2;">Skills</a>
+            <a href="#portfolio" style="--i:3;">Portfolio</a>
+            <a href="#contact" style="--i:4;">Contact</a>
+            <a href="#" class="flag-link" style="--i:5;">
+                <img src="{% static 'images/flag.png' %}" alt="Flag" class="flag-img">
+            </a>
+        </nav>
+        
+    </header>
+    
+    <section id="home" class="home">
+        <div class="home-content">
+            <h3>Dumelang, Leina lame ke</h3>
+            <h1>Thabang Teddy</h1>
+            <h3>Ke <span class="multiple-text"Too></span></h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta, delectus non iste 
+                aspernatur eum fugit iusto minus praesentium vero repellendus suscipit fugiat, 
+                incidunt id iure voluptatum! Aut aliquid eveniet libero?</p>
+            <div class="social-media">
+                <a href="https://www.linkedin.com/in/thabang-teddy-9ba960a8/" class="no-link"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://wa.link/4z22yb" class="no-link"><i class='bx bxl-whatsapp'></i></a>
+                <a href="https://www.instagram.com/teddy._.thabang/" class="no-link"><i class='bx bxl-instagram-alt'></i></a>
+            </div>
+            <a href="{% static 'media/ThabangTeddyCV.pdf' %}" download="Thabang_Teddy_CV.pdf" class="btn">Download CV</a>
+        </div>
+        <div class="home-img">
+            <img src="{% static 'images/home.jpg' %}" alt="home">
+        </div>
+    </section>
+
+    <!---Skills section-->
+
+    <section id="skills" class="skills">
+        <h2 class="heading">My <span>Skills</span></h2>
+        <div class="skills-row">
+            <div class="skills-column">
+                <!-- <h3 class="title">Coding Skills</h3> -->
+                <div class="skills-box">
+                    <div class="skills-content">
+                        <div class="progress python-progress">
+                            <h3>Python <span>80%</span></h3>
+                            <div class="bar"><span></span></div>
+                        </div>
+                        <div class="progress sql-progress">
+                            <h3>SQL <span>70%</span></h3>
+                            <div class="bar"><span></span></div>
+                        </div>
+                        <div class="progress js-progress">
+                            <h3>JavaScript <span>73%</span></h3>
+                            <div class="bar"><span></span></div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="skills-column">
+                <!-- <h3 class="title">Professional Skills</h3> -->
+                <div class="skills-box">
+                    <div class="skills-content">
+                        <div class="progress java-progress">
+                            <h3>Java <span>68%</span></h3>
+                            <div class="bar"><span></span></div>
+                        </div>
+                        <div class="progress ml-progress">
+                            <h3>Machine Learning <span>70%</span></h3>
+                            <div class="bar"><span></span></div>
+                        </div>
+                        <div class="progress ai-progress">
+                            <h3>Artificial Intelligence <span>70%</span></h3>
+                            <div class="bar"><span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="button-container">
+            <h2 class="heading">My <span>Portfolio</span></h2>
+        </div>
+        
+        <div class="portfolio-container">
+            <a href="https://github.com/GreggIsGreat/DrivingSchoolWebApp" class="portfolio-box">
+                <img src="{% static 'images/port1.png' %}" alt="Project 1">
+                <div class="portfolio-layer">
+                    <h4>Driving School Management System</h4>
+                </div>
+            </a>
+            <a href="https://github.com/GreggIsGreat/Plotly-Dash" class="portfolio-box">
+                <img src="{% static 'images/port1.png' %}" alt="Project 2">
+                <div class="portfolio-layer">
+                    <h4>Analytical Dashboard + Prediction Model</h4>
+                </div>
+            </a>
+            <a href="https://github.com/GreggIsGreat/Mavrick" class="portfolio-box">
+                <img src="{% static 'images/maverickimg.png' %}" alt="Project 3">
+                <div class="portfolio-layer">
+                    <h4>Maverick Trading App</h4>
+                </div>
+            </a>
+            <a href="https://github.com/GreggIsGreat/Index-I" class="portfolio-box">
+                <img src="{% static 'images/port1.png' %}" alt="Project 4">
+                <div class="portfolio-layer">
+                    <h4>Index-I Trading App</h4>
+                </div>
+            </a>
+            <a href="https://github.com/GreggIsGreat/DjangoML" class="portfolio-box">
+                <img src="{% static 'images/port1.png' %}" alt="Project 5">
+                <div class="portfolio-layer">
+                    <h4>House Prediction Website</h4>
+                </div>
+            </a>
+            <a href="https://github.com/GreggIsGreat/SecurePayProject2" class="portfolio-box">
+                <img src="{% static 'images/port1.png' %}" alt="Project 6">
+                <div class="portfolio-layer">
+                    <h4>AlphaPal Banking System</h4>
+                </div>
+            </a>
+        </div>
+        <div class="btn-container">
+            <a href="https://github.com/GreggIsGreat" class="btn">View More</a>
+        </div>
+    </section>
+    
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+    <div class="button-container">
+        <h2 class="heading">Contact <span>Me</span></h2>
+    </div>
+    
+    <form action="#" method="post">
+        <div class="input-box">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+        </div>
+        <textarea name="message" rows="10" placeholder="Your Message" required></textarea>
+        <input type="submit" value="Send Message" class="btn">
+    </form>
+</section>
+
+</body>
+</html>
