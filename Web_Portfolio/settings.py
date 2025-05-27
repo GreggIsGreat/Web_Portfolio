@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,19 +77,20 @@ WSGI_APPLICATION = 'Web_Portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# Use SQLite locally, but in production (when DEBUG is False), use a dummy database
-if DEBUG:
+# Use SQLite locally, and PostgreSQL on Vercel
+if os.environ.get('VERCEL'):
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='postgresql://postgres:postgres@localhost:5432/vercel',
+            conn_max_age=600,
+            ssl_require=False,
+        )
+    }
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    # For production (Vercel), use a dummy database since we don't need a database for a static site
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.dummy',
         }
     }
 
