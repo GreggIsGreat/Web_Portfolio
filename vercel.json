@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "Web_Portfolio/wsgi.py",
@@ -6,7 +7,7 @@
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     },
     {
-      "src": "build_files.sh",
+      "src": "bash build_files.sh",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "staticfiles"
@@ -26,6 +27,5 @@
       "src": "/(.*)",
       "dest": "Web_Portfolio/wsgi.py"
     }
-  ],
-  "outputDirectory": "staticfiles"
+  ]
 }
