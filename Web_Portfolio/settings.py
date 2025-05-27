@@ -131,7 +131,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    'Web_Portfolio/static',
+    'Web_Portfolio/Web_Portfolio/static',
 ]
 
 # This is for Vercel deployment
