@@ -776,3 +776,9 @@ body {
         font-size: 9px;
     }
 }
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none; /* also blocks right-click "Save image as" */
+}

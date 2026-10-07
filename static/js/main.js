@@ -118,3 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Run animation on initial load
     setTimeout(animateProgressBars, 500);
 });
+
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('contextmenu', e => e.preventDefault());
+});
