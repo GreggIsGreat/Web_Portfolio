@@ -19,11 +19,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from portfolio.views import contact as portfolio_contact
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('download-cv/', views.download_cv, name='download_cv'),
+    path('contact/', portfolio_contact, name='contact'),
 ]
 
 # Serve static files in both development and production

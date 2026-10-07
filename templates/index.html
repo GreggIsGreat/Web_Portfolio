@@ -181,8 +181,9 @@
     </div>
     {% endif %}
 
-    <form action="" method="post">
+    <form action="{% url 'contact' %}" method="post">
         {% csrf_token %}
+        <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
         <div class="input-box">
             <input type="text" name="name" placeholder="Full Name" required>
             <input type="email" name="email" placeholder="Email Address" required>
