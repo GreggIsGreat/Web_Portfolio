@@ -17,17 +17,23 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1t7_t+gg3#5ix^hg_sqf67krw1-$oaw64%1pzmw@@7&*p__9r9'
+# Set SECRET_KEY in Vercel (Settings -> Environment Variables). The fallback only
+# exists so local runs and the build step (collectstatic) don't crash without it.
+SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-only-insecure-key-change-me')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# Set DEBUG=True in your shell for local development only.
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', 'greggdev.vercel.app', 'greggdev.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app', '.now.sh', 'greggdev.vercel.app', 'greggdev.com']
 
+# Needed so the contact form POST passes CSRF checks behind Vercel's HTTPS proxy
+CSRF_TRUSTED_ORIGINS = [
+    'https://greggdev.com',
+    'https://greggdev.vercel.app',
+]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
@@ -77,13 +83,13 @@ WSGI_APPLICATION = 'Web_Portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# Use SQLite locally, and PostgreSQL on Vercel
-if os.environ.get('VERCEL'):
+# Hosted Postgres (Neon, Supabase, ...) when DATABASE_URL is set, SQLite otherwise.
+# Keyed off DATABASE_URL (not VERCEL) so there is no silent fallback to localhost.
+if os.environ.get('DATABASE_URL'):
     DATABASES = {
         'default': dj_database_url.config(
-            default='postgresql://postgres:postgres@localhost:5432/vercel',
             conn_max_age=600,
-            ssl_require=False,
+            ssl_require=True,
         )
     }
 else:
@@ -137,7 +143,18 @@ STATICFILES_DIRS = [
 
 # This is for Vercel deployment
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# STATICFILES_STORAGE was removed in Django 5.1; STORAGES replaces it.
+# The non-Manifest WhiteNoise storage compresses files but won't 500 the whole
+# page if a {% static %} path is missing.
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',
+    },
+}
 
 # Media files
 MEDIA_URL = '/media/'
