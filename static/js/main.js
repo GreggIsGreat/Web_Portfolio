@@ -117,6 +117,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Run animation on initial load
     setTimeout(animateProgressBars, 500);
+
+    // Project Modal functionality
+    const modal = document.getElementById('project-modal');
+    const modalIframe = document.getElementById('modal-iframe');
+    const modalTitle = document.getElementById('modal-title');
+    const modalExternalLink = document.getElementById('modal-external-link');
+    const closeModalBtn = document.querySelector('.close-modal');
+    const modalTriggers = document.querySelectorAll('.project-modal-trigger');
+
+    // Open modal when clicking on project trigger
+    modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const projectUrl = trigger.getAttribute('data-project-url');
+            const projectTitle = trigger.closest('.project-card').querySelector('h3').textContent;
+            
+            modalTitle.textContent = projectTitle;
+            modalIframe.src = projectUrl;
+            modalExternalLink.href = projectUrl;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        });
+    });
+
+    // Close modal when clicking X button
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        modalIframe.src = ''; // Clear iframe to stop video/audio
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            modalIframe.src = '';
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            modal.style.display = 'none';
+            modalIframe.src = '';
+            document.body.style.overflow = 'auto';
+        }
+    });
 });
 
 document.querySelectorAll('img').forEach(img => {
