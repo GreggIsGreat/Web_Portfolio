@@ -1,20 +1,19 @@
 #!/bin/bash
-set -e  # stop the build on the first error instead of continuing with a broken state
+set -e
 
-# Vercel's Python is uv-managed (PEP 668), so a plain pip install is refused.
-# This is a throwaway build container, so overriding the guard is safe.
-python3 -m pip install --break-system-packages -r requirements.txt
+echo "== Python info =="
+which python3
+python3 --version
 
-python3 manage.py collectstatic --noinput --clear
+# Isolated environment: install and run use the same interpreter
+python3 -m venv .venv
+source .venv/bin/activate
 
-# Create media directory if it doesn't exist
-mkdir -p media
+pip install -r requirements.txt
 
-# Copy any media files from static into media
-if [ -d "static/images" ]; then
-  cp -r static/images/* media/ 2>/dev/null || true
-fi
+echo "== Sanity check =="
+which python
+pip show django
+python -c "import django; print('Django', django.get_version())"
 
-if [ -d "static/media" ]; then
-  cp -r static/media/* media/ 2>/dev/null || true
-fi
+python manage.py collectstatic --noinput --clear
